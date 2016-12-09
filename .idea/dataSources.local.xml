@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - olympics@localhost" uuid="1be1a06f-ad5b-4783-af37-81364a71d89f">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <introspection-scope>olympics:</introspection-scope>
+      <resolve-scope>olympics:</resolve-scope>
+    </data-source>
+  </component>
+</project>

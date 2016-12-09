@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+
+
+    <title>Stage Entries</title>
+</head>
+<body>
+<h1> Search for all stages for an event</h1>
+<div class="container">
+    <div class="row">
+        <form action="#" th:action="@{/stageEntries}" th:object="${form}" method="post"
+              class="form-horizontal col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="eventName" class="control-label col-xs-4">Event name</label>
+                <div class="col-xs-8">
+                    <input class="form-control" id="eventName" placeholder="eventName" type="text" th:field="*{value}" />
+                </div>
+            </div>
+            <button style="text-align: center;" type="submit" class="btn btn-primary marginTop20">Search</button>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <th:block th:each="result : ${results}">
+        <table id="bob" class="table table-hover">
+            <h2 th:text="${result.stageName}"></h2>
+            <thead>
+            <tr>
+                <th>Team Name</th>
+                <th>Rank</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><p th:text="${result.teamName1}"></p></td>
+                <td><p th:text="${result.rank1}"></p></td>
+
+            </tr>
+            <tr>
+                <td><p th:text="${result.teamName2}"></p></td>
+                <td><p th:text="${result.rank2}"></p></td>
+            </tr>
+            </tbody>
+        </table>
+    </th:block>
+</div>
+</body>
+</html>

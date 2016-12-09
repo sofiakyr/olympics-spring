@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <title>Intro</title>
+</head>
+<body style="background-image: url('http://images.all-free-download.com/images/graphiclarge/olympic_rings_on_white_206913.jpg');
+background-repeat: no-repeat;
+    background-position: center center;
+    background-position-y: -60%;">
+<nav id="nav"  class="navbar navbar-light bg-faded">
+    <a class="navbar-brand" href="#">Intro Page</a>
+    <ul class="nav navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link" th:href="@{/events}">View All Sports &amp; Events <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" th:href="@{/resultForm}">Search through the events results <span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+
+</nav>
+
+</body>
+</html>

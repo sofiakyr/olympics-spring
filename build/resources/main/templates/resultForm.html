@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+    <title>Title</title>
+</head>
+<body>
+
+<form >
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Choose a sport
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <th:block th:each="sport : ${formSports}">
+        <li><p class="sportButton" th:attr="data-sport=${sport}" th:text="${sport}"></p></li>
+       </th:block>
+    </ul>
+</div>
+    <div style="margin-top:20px;" class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Choose an event
+            <span class="caret"></span>
+        </button>
+        <ul id="eventsDropdown" class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+        </ul>
+    </div>
+    <a  th:href="@{/results}"> Search for all results <span class="sr-only">(current)</span></a>
+    <a  th:href="@{/searchResults}"> Search for results by rank <span class="sr-only">(current)</span></a>
+    <a th:href="@{/stageEntries}"> Search for all stages of the event <span class="sr-only">(current)</span></a>
+    <button type="button" class="sportButton" data-sport="weightlifting">bob</button>
+ </form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="/js/bootstrap.js"></script>
+<script type="application/javascript">
+    $(document).ready(function() {
+        $(".sportButton").click(function() {
+            var button = $(this);
+            var dataSport = $(button).data("sport");
+            var url = "/eventsFromSport";
+            $.ajax(url, {
+                method: 'POST',
+                data: {
+                    sport: dataSport
+                }
+            }).done(function(result) {
+                console.log(result);
+                var result = JSON.parse(result);
+                $("#eventsDropdown").empty();
+                if(result.length == 0) {
+                    alert("EMPTY");
+                } else {
+                    result.forEach(function(e) {
+                        $("#eventsDropdown").append("<li>"+e+"</li>");
+                    });
+                }
+            });
+        });
+    });
+</script>
+</body>
+
+</html>

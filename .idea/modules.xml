@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/OlympicsSpring.iml" filepath="$PROJECT_DIR$/OlympicsSpring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/olympicsSpring.iml" filepath="$PROJECT_DIR$/.idea/modules/olympicsSpring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/olympicsSpring_main.iml" filepath="$PROJECT_DIR$/.idea/modules/olympicsSpring_main.iml" group="olympicsSpring" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/olympicsSpring_test.iml" filepath="$PROJECT_DIR$/.idea/modules/olympicsSpring_test.iml" group="olympicsSpring" />
+    </modules>
+  </component>
+</project>

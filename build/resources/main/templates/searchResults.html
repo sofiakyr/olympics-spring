@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+
+    <title>events results</title>
+</head>
+<body>
+<h1 style="text-align: center;">Search through the events results</h1>
+<div></div>
+<div class="container">
+    <div class="row">
+        <form action="#" th:action="@{/searchResults}" th:object="${form}" method="post"
+               class="form-horizontal col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="eventName" class="control-label col-xs-4">Event name</label>
+                <div class="col-xs-8">
+                    <input class="form-control" id="eventName" placeholder="eventName" type="text" th:field="*{eventName}" />
+                 </div>
+            </div>
+              <div class="form-group">
+                    <label for="rank" class="control-label col-xs-4">Rank</label>
+                    <div class="col-xs-8">
+                        <input class="form-control" id="rank" placeholder="rank" type="number" th:field="*{rank}" />
+                    </div>
+                  <div class="col-md-offset-6">
+                      <button style="text-align: center;" type="submit" class="btn btn-primary marginTop20">Search</button>
+                  </div>
+              </div>
+            <div>
+                <p style="text-align: center;" th:text = "'The result was, ' + ${result} + '!'" />
+            </div>
+        </form>
+
+   </div>
+      <!--<h3>Choose an event</h3>-->
+    <!--<table id="myTable" class="table table-hover">-->
+        <!--<thead>-->
+        <!--<tr>-->
+            <!--<th>Sport Name</th>-->
+
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<th:block th:each="sport : ${sports}">-->
+            <!--<tr>-->
+                <!--<td><button class="sportButton" th:attr="data-sport=${sport}" th:text="${sport}"></button></td>-->
+            <!--</tr>-->
+        <!--</th:block>-->
+        <!--</tbody>-->
+    <!--</table>-->
+    <!--<button class="sportButton" data-sport="weightlifting">Click</button>-->
+<!--</div>-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+<!--<script src="js/bootstrap.min.js"></script>-->
+<!--<script type="application/javascript">-->
+    <!--$(document).ready(function() {-->
+       <!--$(".sportButton").click(function() {-->
+           <!--var button = $(this);-->
+           <!--var dataSport = $(button).data("sport");-->
+           <!--var url = "/eventsFromSport";-->
+           <!--$.ajax(url, {-->
+               <!--method: 'POST',-->
+               <!--data: {-->
+                   <!--sport: dataSport-->
+               <!--}-->
+           <!--}).done(function(result) {-->
+               <!--console.log(result);-->
+               <!--var result = JSON.parse(result);-->
+               <!--if(result.length == 0) {-->
+                   <!--alert("EMPTY");-->
+               <!--} else {-->
+                   <!--var newList = document.createElement('ul');-->
+                   <!--$(newList).attr('id', dataSport+"List");-->
+                   <!--result.forEach(function(e) {-->
+                       <!--$(newList).append("<li>"+e+"</li>");-->
+                   <!--});-->
+
+                   <!--if ($("#"+dataSport+"List").length == 0) {-->
+                       <!--$(button).after($(newList));-->
+                   <!--} else {-->
+                       <!--$("#"+dataSport+"List").replaceWith($(newList));-->
+                   <!--}-->
+               <!--}-->
+           <!--});-->
+       <!--});-->
+    <!--});-->
+<!--</script>-->
+    </div>
+</body>
+</html>

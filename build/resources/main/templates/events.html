@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<th:block th:each="sport : ${getSports}">
+    <div style="border: solid; display: inline-block;
+    width: 20%;" >
+        <h2 class="sportButton" th:attr="data-sport=${sport.SportName}" th:text="${sport.SportName}+' '+'ˇ'" > </h2>
+        <img th:src="${sport.iconUrl}"/>
+    </div>
+</th:block>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="application/javascript">
+    $(document).ready(function() {
+        $(".sportButton").click(function() {
+            var button = $(this);
+            var dataSport = $(button).data("sport");
+            var url = "/eventsFromSport";
+            $.ajax(url, {
+                method: 'POST',
+                data: {
+                    sport: dataSport
+                }
+            }).done(function(result) {
+                console.log(result);
+                var result = JSON.parse(result);
+                if(result.length == 0) {
+                    alert("EMPTY");
+                } else {
+                    var newList = document.createElement('ul');
+                    $(newList).attr('id', dataSport+"List");
+                    result.forEach(function(e) {
+                        $(newList).append("<li>"+e+"</li>");
+                    });
+
+                    if ($("#"+dataSport+"List").length == 0) {
+                        $(button).after($(newList));
+                    } else {
+                        $("#"+dataSport+"List").replaceWith($(newList));
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+
+        <title>Events Result</title>
+</head>
+
+<body>
+<h1> Search the results for an event</h1>
+<div class="container">
+    <div class="row">
+        <form action="#" th:action="@{/results}" th:object="${form}" method="post"
+              class="form-horizontal col-md-8 col-md-offset-2">
+            <div class="form-group">
+                <label for="eventName" class="control-label col-xs-4">Event name</label>
+                <div class="col-xs-8">
+                    <input class="form-control" id="eventName" placeholder="eventName" type="text" th:field="*{value}" />
+                </div>
+            </div>
+ <button style="text-align: center;" type="submit" class="btn btn-primary marginTop20">Search</button>
+
+            <table id="myTable" class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Record</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="result : ${results}">
+                    <tr>
+                        <td><p  th:text="${result.rank}"></p></td>
+                        <td><p  th:text="${result.name}"></p></td>
+                        <td><p  th:text="${result.record}"></p></td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+
+        </form>
+        </div>
+    </div>
+</body>
+</html>
