@@ -20,13 +20,15 @@ import olympics.JdbcConnection.*;
  * Created by c1519287 on 01/12/2016.
  */
 @Controller
-@SessionAttributes({"results"})
+@SessionAttributes({"results", "eventName"})
 public class ResultsController {
 
 
     @RequestMapping(value="/results", method = RequestMethod.GET)
-    public ModelAndView addPatient(Model model) throws SQLException {
+    public ModelAndView addPatient(@RequestParam(name = "eventName", required = false) String eventName, Model model) throws SQLException {
         model.addAttribute("form",new StringObject());
+        model.addAttribute("eventName", eventName);
+        System.out.println("eventName: "+ eventName);
         return new ModelAndView("/results",(Map<String,?>) model.asMap());
     }
 
@@ -43,7 +45,6 @@ public class ResultsController {
 
         System.out.println("Form Received");
         EventsResultPrepared prepared = new EventsResultPrepared();
-
         attrs.addAttribute("results", prepared.getEventsResult(form.getValue()));
         return new ModelAndView("redirect:/results", attrs.asMap());
 

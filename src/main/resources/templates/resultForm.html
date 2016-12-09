@@ -31,9 +31,9 @@
 
         </ul>
     </div>
-    <a  th:href="@{/results}"> Search for all results <span class="sr-only">(current)</span></a>
-    <a  th:href="@{/searchResults}"> Search for results by rank <span class="sr-only">(current)</span></a>
-    <a th:href="@{/stageEntries}"> Search for all stages of the event <span class="sr-only">(current)</span></a>
+    <a id="resultLink" th:href="@{/results}"> Search for all results <span class="sr-only">(current)</span></a>
+    <a id="searchResultLink" th:href="@{/searchResults}"> Search for results by rank <span class="sr-only">(current)</span></a>
+    <a id="stageEntriesLink" th:href="@{/stageEntries}"> Search for all stages of the event <span class="sr-only">(current)</span></a>
     <button type="button" class="sportButton" data-sport="weightlifting">bob</button>
  </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -57,10 +57,40 @@
                     alert("EMPTY");
                 } else {
                     result.forEach(function(e) {
-                        $("#eventsDropdown").append("<li>"+e+"</li>");
+                        var newLI = document.createElement("li");
+                        $(newLI).attr("data-event", e);
+                        $(newLI).addClass("eventButton");
+                        $(newLI).html(e);
+                        console.log(newLI);
+                        $("#eventsDropdown").append(newLI);
                     });
                 }
             });
+        });
+
+        var resultLink = $("#resultLink");
+        var resultLinkTarget = resultLink.attr("href");
+        var searchResultLink = $("#searchResultLink");
+        var searchResultLinkTarget = searchResultLink.attr("href");
+        var stageEntriesLink = $("#stageEntriesLink");
+        var stageEntriesLinkTarget = stageEntriesLink.attr("href");
+
+        $(document).on("click", ".eventButton", function() {
+            var dataEvent = $(this).data("event");
+            var param = "?eventName=";
+            param=param+dataEvent;
+            console.log(stageEntriesLinkTarget);
+            console.log(param);
+
+            if(dataEvent.length > 0) {
+                resultLink.attr("href", resultLinkTarget+param);
+                searchResultLink.attr("href", searchResultLinkTarget+param);
+                stageEntriesLink.attr("href", stageEntriesLinkTarget+param);
+            } else {
+                resultLink.attr("href", resultLinkTarget);
+                searchResultLink.attr("href", searchResultLinkTarget);
+                stageEntriesLink.attr("href", stageEntriesLinkTarget);
+            }
         });
     });
 </script>

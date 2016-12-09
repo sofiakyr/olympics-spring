@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,11 +20,12 @@ import java.util.Map;
  * Created by c1519287 on 08/12/2016.
  */
 @Controller
-@SessionAttributes({"results"})
+@SessionAttributes({"results","eventName"})
 public class StageEntriesController {
 
     @RequestMapping(value="/stageEntries", method = RequestMethod.GET)
-    public ModelAndView addPatient(Model model) throws SQLException {
+    public ModelAndView addPatient(@RequestParam(name = "eventName", required = false) String eventName, Model model) throws SQLException {
+        model.addAttribute("eventName", eventName);
         model.addAttribute("form",new StringObject());
         return new ModelAndView("/stageEntries",(Map<String,?>) model.asMap());
     }

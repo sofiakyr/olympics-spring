@@ -1,8 +1,6 @@
 package olympics.controllers;
 
 import olympics.JdbcConnection.AllSports;
-import olympics.JdbcConnection.SportsPrepared;
-import olympics.domain.formObjects.StringObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

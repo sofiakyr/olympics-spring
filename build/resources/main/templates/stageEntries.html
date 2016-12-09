@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label for="eventName" class="control-label col-xs-4">Event name</label>
                 <div class="col-xs-8">
-                    <input class="form-control" id="eventName" placeholder="eventName" type="text" th:field="*{value}" />
+                    <input class="form-control" id="eventName" name="value" placeholder="eventName" type="text" th:value="${eventName}" />
                 </div>
             </div>
             <button style="text-align: center;" type="submit" class="btn btn-primary marginTop20">Search</button>

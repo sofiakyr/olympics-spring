@@ -18,7 +18,7 @@ import olympics.JdbcConnection.*;
  * Created by c1519287 on 01/12/2016.
  */
 @Controller
-@SessionAttributes({"result","sports"})
+@SessionAttributes({"searchResult","sports","eventName"})
 public class SearchResultsController {
     private ResultServiceImpl resultService;
     private AllSports sports = new AllSports();
@@ -29,8 +29,9 @@ public class SearchResultsController {
     }
 
     @RequestMapping(value="/searchResults", method = RequestMethod.GET)
-    public ModelAndView addPatient(Model model) throws SQLException {
+    public ModelAndView addPatient(@RequestParam(name = "eventName", required = false) String eventName,Model model) throws SQLException {
         ResultsFormObject formObject = new ResultsFormObject();
+        model.addAttribute("eventName", eventName);
         model.addAttribute("form",formObject);
         model.addAttribute( "sports", sports.getSports());
         return new ModelAndView("/searchResults",(Map<String,?>) model.asMap());
@@ -50,7 +51,7 @@ public class SearchResultsController {
         System.out.println("Form Received");
         resultService.getResult(form);
 
-        attrs.addAttribute("result",resultService.getResult(form));
+        attrs.addAttribute("searchResult",resultService.getResult(form));
         return new ModelAndView("redirect:/searchResults", attrs.asMap());
 
 
