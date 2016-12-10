@@ -1,4 +1,4 @@
-
+#spring db
 # -----CREATE SCHEMA---- #
 
 drop schema if exists olympics;
@@ -116,6 +116,7 @@ CREATE TABLE `overall_record_table` (
   `participanceRank` int(11) NOT NULL,
   `participanceName` varchar(400) NOT NULL,
   `participanceRecord` varchar(400) NULL,
+  `country` varchar(60) NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=199 DEFAULT CHARSET=utf8;
 
@@ -422,6 +423,7 @@ DECLARE ranks int;
 DECLARE name varchar(400);
 DECLARE n int;
 DECLARE l int;
+DECLARE country varchar (60);
 DECLARE participances int;
 DECLARE record varchar(45);
 #counts all the events (number of events not their stages) throught their names
@@ -447,12 +449,13 @@ IF ((SELECT eventType FROM event WHERE eventName=eventsName limit 1)='TEAM')THEN
 CALL teamRank(eventsName,3,2);
 SET name = (SELECT teamName FROM team WHERE teamId=
 (SELECT participanceTeamID FROM teamsorder  ORDER BY wins DESC LIMIT 1 OFFSET n));
-
+SET country = (SELECT countryName FROM country INNER JOIN team
+ON team.teamCountryID=country.countryID WHERE team.teamName = name);
 SET record=(SELECT participanceRecord FROM participance WHERE participanceTeamID =
 (SELECT teamID FROM team WHERE teamName = name limit 1) limit 1);
 IF (name IS NOT NULL)THEN
-INSERT INTO overall_record_table(eventName,participanceRank,participanceName, participanceRecord)
-values(eventsName,ranks,name,record);
+INSERT INTO overall_record_table(eventName,participanceRank,participanceName, participanceRecord,country)
+values(eventsName,ranks,name,record,country);
 
 DROP TABLE if exists teamsorder; 
 END IF;
@@ -467,9 +470,15 @@ IF (record IS NULL) THEN
 (SELECT athletID FROM athlet WHERE concat(athletName,' ', athletLastName) = 
 (SELECT LEFT(name,INSTR(name,",")-1))));
 END IF;
+SET country= (SELECT countryName FROM country INNER JOIN athlet
+ON athlet.athletCountryID=country.countryID WHERE concat(athletName,' ', athletLastName) = name limit 1 );
+IF (country IS NULL) THEN
+SET country= (SELECT countryName FROM country INNER JOIN athlet
+ON athlet.athletCountryID=country.countryID WHERE concat(athletName,' ', athletLastName) = (SELECT LEFT(name,INSTR(name,",")-1)));
+END IF;
 IF (name IS NOT NULL)THEN
-INSERT INTO overall_record_table(eventName,participanceRank,participanceName, participanceRecord)
-values(eventsName,ranks,name,record);
+INSERT INTO overall_record_table(eventName,participanceRank,participanceName, participanceRecord, country)
+values(eventsName,ranks,name,record,country);
 END IF;
 SET l=l+1;
 END IF;
@@ -478,6 +487,7 @@ SET i=i+1;
 END WHILE;
 END$$
 DELIMITER ;
+
 
 DELIMITER $$
 #procedure that returns the teams name for an event name and a spesific rank 
@@ -601,7 +611,7 @@ DELIMITER ;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_event_results`(givenEventName varchar(40))
 BEGIN
-SELECT participanceName, participanceRecord, participanceRank FROM overall_record_table
+SELECT participanceName, participanceRecord, participanceRank, country FROM overall_record_table
 WHERE eventName = givenEventName ORDER BY participanceRank;
 END$$
 DELIMITER ;

@@ -29,7 +29,8 @@ public class EventsResultPrepared {
                 ResultsModelObject rmo = new ResultsModelObject(
                         rs.getString(1),
                         rs.getString(2),
-                        rs.getInt(3)
+                        rs.getInt(3),
+                        rs.getString(4)
                 );
                 System.out.println(rmo.toString());
                 resultsModelObjects.add(rmo);
