@@ -1,0 +1,24 @@
+.hover:hover{
+background: #eff0f2;
+    margin-left: 5%;
+}
+.hover{
+    margin-left: 1%;
+}
+#center{
+    margin: 5%;
+    margin-left: 6%;
+    border: solid;
+    border-radius: 12px;
+    border-color:grey;
+    border-width:1px;
+    padding:8%;
+}
+
+.marginBtn{
+    margin-bottom: 10%;
+}
+a{
+    margin-right: 7%;
+}
+
