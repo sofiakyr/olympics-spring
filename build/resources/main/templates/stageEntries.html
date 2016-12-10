@@ -11,7 +11,7 @@
     <title>Stage Entries</title>
 </head>
 <body>
-<h1> Search for all stages for an event</h1>
+<h1 style="margin-left: 30%; margin-bottom: 5%"> Search for all stages for an event</h1>
 <div class="container">
     <div class="row">
         <form action="#" th:action="@{/stageEntries}" th:object="${form}" method="post"
@@ -22,7 +22,7 @@
                     <input class="form-control" id="eventName" name="value" placeholder="eventName" type="text" th:value="${eventName}" />
                 </div>
             </div>
-            <button style="text-align: center;" type="submit" class="btn btn-primary marginTop20">Search</button>
+            <button style="margin-left: 30%; margin-top: 3%; margin-bottom: 3%" type="submit" class="btn btn-primary marginTop20">Search</button>
         </form>
     </div>
 </div>
