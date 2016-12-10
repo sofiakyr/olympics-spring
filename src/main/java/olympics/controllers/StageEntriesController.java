@@ -20,7 +20,7 @@ import java.util.Map;
  * Created by c1519287 on 08/12/2016.
  */
 @Controller
-@SessionAttributes({"results","eventName"})
+@SessionAttributes({"stageResults","eventName"})
 public class StageEntriesController {
 
     @RequestMapping(value="/stageEntries", method = RequestMethod.GET)
@@ -49,7 +49,7 @@ public class StageEntriesController {
         System.out.println("Form Received");
         StagesPrepared prepared = new StagesPrepared();
 
-        attrs.addAttribute("results", prepared.getStages(form.getValue()));
+        attrs.addAttribute("stageResults", prepared.getStages(form.getValue()));
         return new ModelAndView("redirect:/stageEntries", attrs.asMap());
 
     }
