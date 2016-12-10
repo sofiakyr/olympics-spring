@@ -462,6 +462,11 @@ else
 SET name =(SELECT getNameFromEventAndRankAthlet(eventsName,ranks));
 SET record=(SELECT participanceRecord FROM participance WHERE participanceAthlet =
 (SELECT athletID FROM athlet WHERE concat(athletName,' ', athletLastName) = name limit 1) );
+IF (record IS NULL) THEN
+ SET record=(SELECT participanceRecord FROM participance WHERE participanceAthlet =
+(SELECT athletID FROM athlet WHERE concat(athletName,' ', athletLastName) = 
+(SELECT LEFT(name,INSTR(name,",")-1))));
+END IF;
 IF (name IS NOT NULL)THEN
 INSERT INTO overall_record_table(eventName,participanceRank,participanceName, participanceRecord)
 values(eventsName,ranks,name,record);
