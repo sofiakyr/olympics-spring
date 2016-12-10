@@ -31,7 +31,12 @@ public class SearchResultsController {
     @RequestMapping(value="/searchResults", method = RequestMethod.GET)
     public ModelAndView addPatient(@RequestParam(name = "eventName", required = false) String eventName,Model model) throws SQLException {
         ResultsFormObject formObject = new ResultsFormObject();
-        model.addAttribute("eventName", eventName);
+        if (eventName==null){
+            model.addAttribute("eventName", "eventName");
+        }else{
+            model.addAttribute("eventName", eventName);
+
+        }
         model.addAttribute("form",formObject);
         model.addAttribute( "sports", sports.getSports());
         return new ModelAndView("/searchResults",(Map<String,?>) model.asMap());

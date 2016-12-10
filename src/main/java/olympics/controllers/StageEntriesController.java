@@ -25,7 +25,12 @@ public class StageEntriesController {
 
     @RequestMapping(value="/stageEntries", method = RequestMethod.GET)
     public ModelAndView addPatient(@RequestParam(name = "eventName", required = false) String eventName, Model model) throws SQLException {
-        model.addAttribute("eventName", eventName);
+        if (eventName==null){
+            model.addAttribute("eventName", "eventName");
+        }else{
+            model.addAttribute("eventName", eventName);
+
+        }
         model.addAttribute("form",new StringObject());
         return new ModelAndView("/stageEntries",(Map<String,?>) model.asMap());
     }
