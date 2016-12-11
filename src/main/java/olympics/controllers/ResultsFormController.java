@@ -1,6 +1,6 @@
 package olympics.controllers;
 
-import olympics.JdbcConnection.AllSports;
+import olympics.JdbcConnection.SportsPrepared;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +16,7 @@ import java.util.Map;
 @SessionAttributes({"formEvents","formSports"})
 public class ResultsFormController {
 
-       AllSports prepared = new AllSports();
+       SportsPrepared prepared = new SportsPrepared();
 
 
         @RequestMapping(value="/resultForm", method = RequestMethod.GET)

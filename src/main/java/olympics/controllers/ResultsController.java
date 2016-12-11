@@ -10,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import olympics.domain.formObjects.ResultsFormObject;
-import olympics.domain.services.ResultServiceImpl;
 import javax.validation.Valid;
 import java.sql.SQLException;
 import java.util.List;
@@ -20,12 +19,12 @@ import olympics.JdbcConnection.*;
  * Created by c1519287 on 01/12/2016.
  */
 @Controller
-@SessionAttributes({"results", "eventName"})
+@SessionAttributes({"results","eventName"})
 public class ResultsController {
 
 
     @RequestMapping(value="/results", method = RequestMethod.GET)
-    public ModelAndView addPatient(@RequestParam(name = "eventName", required = false) String eventName, Model model) throws SQLException {
+    public ModelAndView addPatient(@RequestParam(name = "eventName", required = false) String eventName,Model model) throws SQLException {
         model.addAttribute("form",new StringObject());
         if (eventName==null){
             model.addAttribute("eventName", "eventName");
@@ -33,13 +32,12 @@ public class ResultsController {
             model.addAttribute("eventName", eventName);
 
         }
-
         return new ModelAndView("/results",(Map<String,?>) model.asMap());
     }
 
     @RequestMapping(value = "/results", method = RequestMethod.POST)
     public ModelAndView addPersonFromForm
-            (@Valid StringObject form, BindingResult bindingResult, Model attrs) throws SQLException {
+            ( @Valid StringObject form, BindingResult bindingResult, Model attrs) throws SQLException {
 
         if (bindingResult.hasErrors()) {
             System.out.println("Binding Error.  There were " + bindingResult.getErrorCount() + " errors.");

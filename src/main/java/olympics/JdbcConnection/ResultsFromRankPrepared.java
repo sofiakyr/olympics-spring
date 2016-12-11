@@ -3,7 +3,7 @@ package olympics.JdbcConnection; /**
  */
 import java.sql.*;
 
-public class PreparedCallOnResults {
+public class ResultsFromRankPrepared {
    private String names = "there is such recored";
     public String getResult (String eventName, Integer rank) throws SQLException {
         JdbcCon jdbcCon = new JdbcCon();

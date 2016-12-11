@@ -19,7 +19,7 @@
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
         <th:block th:each="sport : ${formSports}">
-        <li class="hover" ><p class="sportButton" th:attr="data-sport=${sport}" th:text="${sport}"></p></li>
+        <li class="hover" ><p class="sportButton" th:attr="data-sport=${sport.SportName}" th:text="${sport.SportName}"></p></li>
        </th:block>
     </ul>
 </div>
@@ -33,7 +33,7 @@
         </ul>
     </div>
     <a id="resultLink" th:href="@{/results}"> Search for all results <span class="sr-only">(current)</span></a>
-    <a id="searchResultLink" th:href="@{/searchResults}"> Search for results by rank <span class="sr-only">(current)</span></a>
+    <a id="searchResultLink" th:href="@{/ResultsFromRank}"> Search for results by rank <span class="sr-only">(current)</span></a>
     <a id="stageEntriesLink" th:href="@{/stageEntries}"> Search for all stages of the event <span class="sr-only">(current)</span></a>
 
  </form>

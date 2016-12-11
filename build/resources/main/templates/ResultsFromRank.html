@@ -14,7 +14,7 @@
 <div></div>
 <div class="container">
     <div class="row">
-        <form action="#" th:action="@{/searchResults}" th:object="${form}" method="post"
+        <form action="#" th:action="@{/ResultsFromRank}" th:object="${form}" method="post"
                class="form-horizontal col-md-8 col-md-offset-2">
             <div class="form-group">
                 <label for="eventName" class="control-label col-xs-4">Event name</label>
@@ -32,7 +32,7 @@
                   </div>
               </div>
             <div>
-                <p style="text-align: center;" th:text = "'The result was, ' + ${searchResult} + '!'" />
+                <p style="text-align: center;" th:text = "'The result was, ' + ${rankResult} + '!'" />
             </div>
         </form>
 
